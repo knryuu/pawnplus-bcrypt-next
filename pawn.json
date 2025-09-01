@@ -1,0 +1,8 @@
+{
+	"user": "knryuu",
+	"repo": "pawnplus-mysql-next",
+	"dependencies": [
+		"openmultiplayer/omp-stdlib",
+		"IS4Code/PawnPlus:v1.5.1",
+	]
+}
