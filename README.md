@@ -1,7 +1,7 @@
 # [PawnPlus](https://github.com/IS4Code/PawnPlus) Bcrypt NEXT
-PawnPlus bcrypt NEXT with some improvement based on [samp_bcrypt plugin](https://github.com/Sreyas-Sreelal/samp-bcrypt).
+PawnPlus bcrypt NEXT with some improvement based on [samp_bcrypt plugin](https://github.com/Sreyas-Sreelal/samp-bcrypt) only.
 
-Unlike the other versions, this one keeps everything simple and neat. Only 138 lines of code to implement it.
+Unlike the other versions, this one keeps everything simple and neat. Only less than 200 lines of code to implement it.
 
 > [!WARNING]
 > Only works with open.mp version, feel free to contribute if you want this to available for SA:MP.
@@ -19,8 +19,7 @@ native Task:bcrypt_async_hash_s(ConstStringTag:input, cost = BCRYPT_COST);
 native Task:bcrypt_async_verify(const input[], const hash[]);
 native Task:bcrypt_async_verify_s(ConstStringTag:input, ConstStringTag:hash);
 
-// Internal
-native bcrypt_get_hash__(AmxString:hash, size = BCRYPT_HASH_LENGTH);
+native String:bcrypt_get_hash_s();
 ```
 
 ## Examples 
