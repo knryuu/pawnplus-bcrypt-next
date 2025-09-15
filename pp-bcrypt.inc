@@ -1,6 +1,6 @@
 /*
 	PawnPlus Bcrypt NEXT
-	Versiao: 1.1
+	Versiao: 1.2
 
 	PawnPlus Bcrypt is an extension include that adds Dynamic String with
 	Task Await for samp_bcrypt.inc made by SyS.
@@ -36,7 +36,15 @@
 #define _samp_pp_bcrypt_included
 
 // Redirect Natives
-native bcrypt_get_hash__(AmxString:hash, size = BCRYPT_HASH_LENGTH) = bcrypt_get_hash;
+#if !defined bcrypt_get_hash_s
+native bcrypt_get_hash_impl_s(AmxString:hash, size = BCRYPT_HASH_LENGTH) = bcrypt_get_hash;
+stock String:bcrypt_get_hash_s()
+{
+    new String:ret = str_new_buf(BCRYPT_HASH_LENGTH);
+    bcrypt_get_hash_impl_s(ret);
+    return ret;
+}
+#endif
 
 // Functions
 stock Task:bcrypt_async_hash(const input[], cost = BCRYPT_COST)
@@ -135,8 +143,7 @@ public _pp@OnBcryptCalled__(type__, state__, Handle:h__)
 
 		if (type__ == 1)
 		{
-			new String:hash = str_new_buf(BCRYPT_HASH_LENGTH);
-			bcrypt_get_hash__(hash);
+            new String:hash = bcrypt_get_hash_s();
 			task_set_result_str_s(t, hash);
 			return 1;
 		}
