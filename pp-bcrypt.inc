@@ -1,6 +1,6 @@
 /*
 	PawnPlus Bcrypt NEXT
-	Versiao: 1.2
+	Versiao: 1.3
 
 	PawnPlus Bcrypt is an extension include that adds Dynamic String with
 	Task Await for samp_bcrypt.inc made by SyS.
@@ -25,38 +25,36 @@
 	#endinput
 #endif
 
+#tryinclude <PawnPlus>
 #if !defined _PawnPlus_included
-	#error "Include PawnPlus.inc first!"
+	#error "You need to download PawnPlus in order to use this include."
 #endif
 
+#tryinclude <samp_bcrypt>
 #if !defined _samp_bcrypt_included
-	#error "Include samp_bcrypt.inc first!"
+	#error "You need to download samp_bcrypt by SyS in order to use this include."
 #endif
 
 #define _samp_pp_bcrypt_included
 
 // Redirect Natives
-#if !defined bcrypt_get_hash_s
 native bcrypt_get_hash_impl_s(AmxString:hash, size = BCRYPT_HASH_LENGTH) = bcrypt_get_hash;
+
+// Functions
 stock String:bcrypt_get_hash_s()
 {
     new String:ret = str_new_buf(BCRYPT_HASH_LENGTH);
     bcrypt_get_hash_impl_s(ret);
     return ret;
 }
-#endif
 
-// Functions
 stock Task:bcrypt_async_hash(const input[], cost = BCRYPT_COST)
 {
 	new
 		Task:hash_task = task_new(),
 		Handle:hash_handle = handle_new(hash_task, .weak = true);
 
-	new callback_name[3];
-	callback_name = amx_encode_value_public_name("_pp@OnBcryptCalled__", hash_handle);
-
-	new result = pawn_call_native("bcrypt_hash", "dssds*", 0, callback_name, input, cost, "d", _:hash_handle);
+	new result = pawn_call_native("bcrypt_hash", "dssds*", 0, "_pp@OnBcryptCalled__", input, cost, "d", _:hash_handle);
 
 	if (result)
 	{
@@ -74,10 +72,7 @@ stock Task:bcrypt_async_hash_s(ConstStringTag:input, cost = BCRYPT_COST)
 		Task:hash_task = task_new(),
 		Handle:hash_handle = handle_new(hash_task, .weak = true);
 
-	new callback_name[3];
-	callback_name = amx_encode_value_public_name("_pp@OnBcryptCalled__", hash_handle);
-
-	new result = pawn_call_native("bcrypt_hash", "dsSds*", 1, callback_name, String:input, cost, "d", _:hash_handle);
+	new result = pawn_call_native("bcrypt_hash", "dsSds*", 1, "_pp@OnBcryptCalled__", String:input, cost, "d", _:hash_handle);
 
 	if (result)
 	{
@@ -95,10 +90,7 @@ stock Task:bcrypt_async_verify(const input[], const hash[])
 		Task:hash_task = task_new(),
 		Handle:hash_handle = handle_new(hash_task, .weak = true);
 
-	new callback_name[3];
-	callback_name = amx_encode_value_public_name("_pp@OnBcryptCalled__", hash_handle);
-
-	new result = pawn_call_native("bcrypt_verify", "dssss*", 2, callback_name, input, hash, "d", _:hash_handle);
+	new result = pawn_call_native("bcrypt_verify", "dssss*", 2, "_pp@OnBcryptCalled__", input, hash, "d", _:hash_handle);
 
 	if (result)
 	{
@@ -116,10 +108,7 @@ stock Task:bcrypt_async_verify_s(ConstStringTag:input, ConstStringTag:hash)
 		Task:hash_task = task_new(),
 		Handle:hash_handle = handle_new(hash_task, .weak = true);
 
-	new callback_name[3];
-	callback_name = amx_encode_value_public_name("_pp@OnBcryptCalled__", hash_handle);
-
-	new result = pawn_call_native("bcrypt_verify", "dsSSs*", 2, callback_name, String:input, String:hash, "d", _:hash_handle);
+	new result = pawn_call_native("bcrypt_verify", "dsSSs*", 2, "_pp@OnBcryptCalled__", String:input, String:hash, "d", _:hash_handle);
 
 	if (result)
 	{
@@ -131,7 +120,6 @@ stock Task:bcrypt_async_verify_s(ConstStringTag:input, ConstStringTag:hash)
 	return hash_task;
 }
 
-// Callbacks
 forward _pp@OnBcryptCalled__(type__, state__, Handle:h__);
 public _pp@OnBcryptCalled__(type__, state__, Handle:h__)
 {
