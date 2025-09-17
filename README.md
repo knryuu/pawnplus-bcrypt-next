@@ -3,7 +3,7 @@ PawnPlus bcrypt NEXT with some improvement based on [samp_bcrypt plugin](https:/
 
 Unlike the other versions, this one keeps everything simple and neat. Only less than 200 lines of code to implement it.
 
-> [!INFO]
+> [!NOTE]
 > Now the include supports both open.mp and SA:MP seamlessly.
 
 ## Installation
