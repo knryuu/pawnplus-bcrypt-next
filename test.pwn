@@ -1,8 +1,5 @@
 
 #include <open.mp>
-#include <PawnPlus>
-#include <samp_bcrypt>
-
 #include "pp-bcrypt.inc"
 
 main()

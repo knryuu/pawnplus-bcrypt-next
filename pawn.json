@@ -2,7 +2,8 @@
 	"user": "knryuu",
 	"repo": "pawnplus-bcrypt-next",
 	"dependencies": [
-		"openmultiplayer/omp-stdlib",
-		"IS4Code/PawnPlus:v1.5.1",
+		"pawn-lang/samp-stdlib",
+    	"IS4Code/PawnPlus:v1.5.1",
+    	"Sreyas-Sreelal/samp-bcrypt:0.4.1"
 	]
 }

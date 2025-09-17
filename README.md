@@ -3,13 +3,24 @@ PawnPlus bcrypt NEXT with some improvement based on [samp_bcrypt plugin](https:/
 
 Unlike the other versions, this one keeps everything simple and neat. Only less than 200 lines of code to implement it.
 
-> [!WARNING]
-> Only works with open.mp version, feel free to contribute if you want this to available for SA:MP.
+> [!INFO]
+> Now the include supports both open.mp and SA:MP seamlessly.
 
 ## Installation
+
+### sampctl
+Type the following command:
+```bash
+sampctl install knryuu/pawnplus-bcrypt-next
+```
+To install the include.
+
+Began using the include by typing `#include <pp-bcrypt>`.
+
+### Manual Installation
 * Download [PawnPlus](https://github.com/IS4Code/PawnPlus/releases/latest) and [samp_bcrypt](https://github.com/Sreyas-Sreelal/samp-bcrypt/releases/latest), extract it to your server folder.
 * Download pp-bcrypt.inc from the release page, put the .inc file to `pawno/include` or `qawno/include`.
-* Use the include by typing `#include <pp-bcrypt>`.
+* Began using the include by typing `#include <pp-bcrypt>`.
 
 ## Functions
 ```pawn
